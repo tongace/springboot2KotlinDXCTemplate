@@ -10,5 +10,11 @@ import org.springframework.web.bind.annotation.ResponseBody
 class HomeController {
     @GetMapping("/test")
     @ResponseBody
-    fun test() = JsonUtil.convertObjectToJacksonString(Combo("","Select"))
+    fun test() = JsonUtil.convertObjectToJacksonString(Combo("", "Select"))
+
+    @GetMapping("/home")
+    fun home() = "views/home.html"
+
+    @GetMapping("/home/js/home.js")
+    fun js() = "js/home.js"
 }

@@ -38,6 +38,18 @@
             <artifactId>spring-boot</artifactId>
             <version>${spring-boot.version}</version>
         </dependency>
+        <!-- ST dependency -->
+        <dependency>
+            <groupId>tdem-standard</groupId>
+            <artifactId>st3-api</artifactId>
+            <version>1.1.12-RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>tdem-standard</groupId>
+            <artifactId>st3-batch</artifactId>
+            <version>1.1.17-RELEASE</version>
+        </dependency>
+        <!-- END ST dependency -->
     </dependencies>
 
     <build>

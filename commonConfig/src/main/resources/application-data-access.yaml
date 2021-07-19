@@ -1,0 +1,22 @@
+app-jdbc:
+  driver-class-name: @database.jdbc.driverClassName@
+  maximum-pool-size: @database.jdbc.maximumPoolSize@
+  url: @database.jdbc.url@
+  username: @database.jdbc.username@
+  password: @database.jdbc.password@
+app-jpa:
+  driver-class-name: @database.jdbc.driverClassName@
+  url: @database.jdbc.url@
+  username: @database.jdbc.username@
+  password: @database.jdbc.password@
+  hibernate-dialect: @database.hibernate.dialect@
+  database: @database.jpa.database@
+  show-sql: @database.jpa.showSql@
+bfw-jpa:
+  driver-class-name: @database.jdbc.driverClassName@
+  url: @database.bfw.jdbc.url@
+  username: @database.bfw.jdbc.username@
+  password: @database.bfw.jdbc.password@
+  hibernate-dialect: @database.hibernate.dialect@
+  database: @database.jpa.database@
+  show-sql: @database.jpa.showSql@

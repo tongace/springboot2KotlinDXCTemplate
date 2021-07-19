@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <artifactId>springboot2KotlinDXCTemplate</artifactId>
+        <groupId>com.dxc.application</groupId>
+        <version>1.0.0</version>
+    </parent>
+
+    <artifactId>commonConfig</artifactId>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.jetbrains.kotlin</groupId>
+            <artifactId>kotlin-stdlib-jdk8</artifactId>
+            <version>${kotlin.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot</artifactId>
+            <version>${spring-boot.version}</version>
+        </dependency>
+    </dependencies>
+
+    <!-- Profiles configuration -->
+    <profiles>
+        <profile>
+            <id>OFFLINE</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <!-- standard properties -->
+                <standard.projectCode>DXC</standard.projectCode>
+                <standard.homepath>/home/chairat</standard.homepath>
+                <standard.mail.smtp.host>172.26.8.14</standard.mail.smtp.host>
+                <standard.mail.fromemail>espi_dev@tdem.toyota-asia.com</standard.mail.fromemail>
+                <standard.mail.toemail>chairat_sam_hp@tdem.toyota-asia.com</standard.mail.toemail>
+                <standard.mail.ccemail></standard.mail.ccemail>
+                <!-- database -->
+                <database.jdbc.driverClassName>oracle.jdbc.OracleDriver</database.jdbc.driverClassName>
+                <database.jdbc.maximumPoolSize>2</database.jdbc.maximumPoolSize>
+                <database.jdbc.url>jdbc:oracle:thin:@localhost:8521:XE</database.jdbc.url>
+                <database.jdbc.username>DXCDEMOAPP</database.jdbc.username>
+                <database.jdbc.password>dxcdemoapp</database.jdbc.password>
+                <database.bfw.jdbc.url>jdbc:oracle:thin:@localhost:8521:XE</database.bfw.jdbc.url>
+                <database.bfw.jdbc.username>DXCDEMOAPP</database.bfw.jdbc.username>
+                <database.bfw.jdbc.password>dxcdemoapp</database.bfw.jdbc.password>
+                <database.hibernate.dialect>org.hibernate.dialect.Oracle10gDialect</database.hibernate.dialect>
+                <database.jpa.database>ORACLE</database.jpa.database>
+                <database.jpa.showSql>true</database.jpa.showSql>
+            </properties>
+        </profile>
+    </profiles>
+    <!-- end Profiles configuration -->
+
+    <build>
+        <finalName>${project.artifactId}</finalName>
+        <sourceDirectory>src/main/kotlin</sourceDirectory>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>3.2.0</version>
+                <configuration>
+                    <delimiters>
+                        <delimiter>@</delimiter>
+                    </delimiters>
+                    <useDefaultDelimiters>false</useDefaultDelimiters>
+                    <encoding>UTF-8</encoding>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.jetbrains.kotlin</groupId>
+                <artifactId>kotlin-maven-plugin</artifactId>
+                <version>${kotlin.version}</version>
+                <executions>
+                    <execution>
+                        <id>compile</id>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>compile</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>test-compile</id>
+                        <phase>test-compile</phase>
+                        <goals>
+                            <goal>test-compile</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <args>
+                        <arg>-Xjsr305=strict</arg>
+                    </args>
+                    <jvmTarget>${java.version}</jvmTarget>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.jetbrains.kotlin</groupId>
+                        <artifactId>kotlin-maven-allopen</artifactId>
+                        <version>${kotlin.version}</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+        </plugins>
+
+    </build>
+
+</project>

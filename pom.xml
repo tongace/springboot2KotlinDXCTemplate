@@ -8,13 +8,15 @@
 	<packaging>pom</packaging>
 	<modules>
 		<module>webDemo</module>
-<!--		<module>commonLib</module>-->
-<!--		<module>batchDemo</module>-->
-<!--    	<module>configurationLib</module>-->
+		<module>commonLib</module>
+        <module>commonConfig</module>
   	</modules>
 	<properties>
 		<java.version>1.8</java.version>
 		<kotlin.version>1.5.21</kotlin.version>
-		<kotlin.compiler.incremental>true</kotlin.compiler.incremental>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<spring-framework.version>5.3.8</spring-framework.version>
+		<spring-boot.version>2.5.2</spring-boot.version>
 	</properties>
 </project>

@@ -1,1 +1,14 @@
-
+server:
+  servlet:
+    context-path: /demo
+spring:
+  profiles:
+    include:
+      - data-access
+  thymeleaf:
+    cache:  false
+  devtools:
+    restart:
+      additional-paths: ../configurationLib,../commonLib
+logging:
+  config: classpath:logback.xml

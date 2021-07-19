@@ -1,5 +1,7 @@
-package com.example.webdemo
+package com.dxc.application.webdemo.controller
 
+import com.dxc.application.commonlib.model.Combo
+import com.dxc.application.commonlib.util.JsonUtil
 import org.springframework.stereotype.Controller
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.ResponseBody
@@ -8,5 +10,5 @@ import org.springframework.web.bind.annotation.ResponseBody
 class HomeController {
     @GetMapping("/test")
     @ResponseBody
-    fun test()="Hello Kotlin"
+    fun test() = JsonUtil.convertObjectToJacksonString(Combo("","Select"))
 }

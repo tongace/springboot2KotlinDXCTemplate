@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class="net.logstash.logback.encoder.LogstashEncoder">
+            <customFields>{"app-name":"webDemo", "category":"framework"}</customFields>
+            <fieldNames>
+                <timestamp>time</timestamp>
+                <version>[ignore]</version>
+            </fieldNames>
+        </encoder>
+        <encoder>
+            <pattern>%date | %5p | %logger.%M [%file:%line] | %msg%n</pattern>
+            <charset>utf8</charset>
+        </encoder>
+    </appender>
+    <appender name="APPLICATION" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class="net.logstash.logback.encoder.LogstashEncoder">
+            <customFields>{"app-name":"webDemo", "category":"application"}</customFields>
+            <fieldNames>
+                <timestamp>time</timestamp>
+                <version>[ignore]</version>
+            </fieldNames>
+        </encoder>
+        <encoder>
+            <pattern>%date | %5p | %logger.%M [%file:%line] | %msg%n</pattern>
+            <charset>utf8</charset>
+        </encoder>
+    </appender>
+
+    <logger name="com.example.webdemo" level="INFO" additivity="false">
+        <appender-ref ref="APPLICATION"/>
+    </logger>
+
+    <root level="DEBUG">
+        <appender-ref ref="STDOUT"/>
+    </root>
+
+</configuration>

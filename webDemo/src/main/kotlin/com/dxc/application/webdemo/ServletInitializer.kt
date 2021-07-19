@@ -1,4 +1,4 @@
-package com.example.webdemo
+package com.dxc.application.webdemo
 
 import org.springframework.boot.builder.SpringApplicationBuilder
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer

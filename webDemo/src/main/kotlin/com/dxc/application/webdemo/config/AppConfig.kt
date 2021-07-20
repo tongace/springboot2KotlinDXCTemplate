@@ -1,6 +1,7 @@
 package com.dxc.application.webdemo.config
 
 import org.springframework.context.annotation.Bean
+import org.springframework.context.annotation.ComponentScan
 import org.springframework.context.annotation.Configuration
 import org.springframework.context.annotation.PropertySource
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer
@@ -11,6 +12,11 @@ import java.nio.charset.StandardCharsets
 
 @Configuration
 @PropertySource("classpath:demo-application.properties")
+@ComponentScan(
+    "com.dxc.application.webdemo.feature",
+    "com.dxc.application.commonlib.repository",
+    "com.dxc.application.commonlib.service"
+)
 class AppConfig {
 
     companion object {

@@ -18,7 +18,6 @@ import java.nio.charset.StandardCharsets
 
 @Configuration
 @EnableWebMvc
-@ComponentScan("com.dxc.application.webdemo.controller")
 class ThymeleafConfig() : ApplicationContextAware, WebMvcConfigurer {
     @Autowired
     private lateinit var thymeleafProperties: ThymeleafProperties

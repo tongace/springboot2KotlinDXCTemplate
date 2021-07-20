@@ -19,8 +19,7 @@ class AppDatabaseConfig(private val dsProperties: AppDataSourceProperties) {
     @Bean
     @Primary
     @Qualifier("appDataSource")
-    fun getDataSource() = BasicDataSource()
-        .apply {
+    fun getDataSource() = BasicDataSource().apply {
             driverClassName = dsProperties.driverClassName
             url = dsProperties.url
             username = dsProperties.username
@@ -30,14 +29,5 @@ class AppDatabaseConfig(private val dsProperties: AppDataSourceProperties) {
     @Bean
     @Qualifier("appTx")
     fun appTransactionManager() = DataSourceTransactionManager(getDataSource())
-}
-
-abstract class BaseRepository : NamedParameterJdbcDaoSupport() {
-    @Autowired
-    @Qualifier("appDataSource")
-    fun setJdbcDaoSupportDataSource(dataSource:DataSource){
-        Locale.setDefault(Locale.US)
-        super.setDataSource(dataSource)
-    }
 }
 

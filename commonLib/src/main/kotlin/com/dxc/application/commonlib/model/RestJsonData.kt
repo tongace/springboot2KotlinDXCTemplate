@@ -1,9 +1,10 @@
 package com.dxc.application.commonlib.model
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import java.math.BigDecimal
 
-data class RestJsonData<T>(
-    val message: String?,
-    val rowCount: BigDecimal?,
-    val data :T?
-)
+@JsonIgnoreProperties(ignoreUnknown = true)
+data class RestJsonData<T>(var rowCount: Int?) {
+    var message: String? = null
+    var data :T? = null
+}

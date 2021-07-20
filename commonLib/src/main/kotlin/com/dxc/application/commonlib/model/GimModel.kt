@@ -18,6 +18,11 @@ data class GimHeader(val gimType: String?) {
     var modifiedBy: String? = null
     var modifiedDt: Date? = null
     var displayActiveFlag: String? = null
+
+    var searchGimTypes: MutableList<String>? = null
+    var searchGimDesc: String? = null
+    var searchActiveFlag: String? = null
+    var mode: String? = ""
 }
 
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -32,5 +37,6 @@ data class GimDetail(val gimType: String?, val gimCd: String?) {
     var createdDt: LocalDateTime? = null
     var modifiedBy: String? = null
     var modifiedDt: LocalDateTime? = null
+    var mode: String? = ""
 }
 

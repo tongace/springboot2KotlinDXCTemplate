@@ -1,6 +1,6 @@
 package com.dxc.application.webdemo.config
 
-import com.example.application.commonconfig.properties.AppDataSourceProperties
+import com.dxc.application.commonconfig.properties.AppDataSourceProperties
 import org.apache.commons.dbcp2.BasicDataSource
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Qualifier

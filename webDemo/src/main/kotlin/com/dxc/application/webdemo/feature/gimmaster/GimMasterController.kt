@@ -26,7 +26,7 @@ class GimMasterController(
     @PostMapping(value = ["/gimheader"], produces = [MediaType.APPLICATION_JSON_VALUE])
     @ResponseBody
     fun getGimHeader(@RequestBody model: GimHeader?, request: HttpServletRequest): RestJsonData<List<GimHeader>> {
-        val returnData = RestJsonData<List<GimHeader>>(rowCount = null)
+        val returnData = RestJsonData<List<GimHeader>>()
         model?.let {
             val gimList = gimService.getGimHeader(it)
             if (gimList?.isNotEmpty() == true) {
@@ -45,7 +45,7 @@ class GimMasterController(
     @PutMapping(value = ["/gimheader"], produces = [MediaType.APPLICATION_JSON_VALUE])
     @ResponseBody
     fun saveGimHeader(@RequestBody gimHeader: GimHeader?): RestJsonData<String> {
-        val returnData = RestJsonData<String>(rowCount = null)
+        val returnData = RestJsonData<String>()
         gimHeader?.let {
             it.createdBy = "csamphao"
             it.modifiedBy = "csamphao"
@@ -57,10 +57,10 @@ class GimMasterController(
     @PostMapping(value = ["/gimdetail"], produces = [MediaType.APPLICATION_JSON_VALUE])
     @ResponseBody
     fun getGimDetail(@RequestBody model: GimDetail?, request: HttpServletRequest): RestJsonData<List<GimDetail>> {
-        val returnData = RestJsonData<List<GimDetail>>(rowCount = null)
+        val returnData = RestJsonData<List<GimDetail>>()
         model?.let {
             val gimDetailList = gimService.getGimDetail(it);
-            if (gimDetailList?.isNotEmpty()==true) {
+            if (gimDetailList?.isNotEmpty() == true) {
                 returnData.data = gimDetailList
             } else {
                 returnData.message = messageSource.getMessage(
@@ -72,23 +72,25 @@ class GimMasterController(
         }
         return returnData
     }
+
     @PutMapping(value = ["/gimdetail"], produces = [MediaType.APPLICATION_JSON_VALUE])
     @ResponseBody
-    fun saveGimDetail(@RequestBody model: GimDetail?) : RestJsonData<String>{
-        val returnData = RestJsonData<String>(rowCount = null)
+    fun saveGimDetail(@RequestBody model: GimDetail?): RestJsonData<String> {
+        val returnData = RestJsonData<String>()
         model?.let {
             it.createdBy = "csamphao"
             it.modifiedBy = "csamphao"
-            returnData.rowCount =gimService.saveGimDetail(it);
+            returnData.rowCount = gimService.saveGimDetail(it);
         }
         return returnData
     }
+
     @DeleteMapping(value = ["/gimdetail"], produces = [MediaType.APPLICATION_JSON_VALUE])
     @ResponseBody
-    fun deleteGimDetail(@RequestBody input: Array<GimDetail>?): RestJsonData<String>{
-        val returnData = RestJsonData<String>(rowCount = null)
+    fun deleteGimDetail(@RequestBody input: Array<GimDetail>?): RestJsonData<String> {
+        val returnData = RestJsonData<String>()
         input?.let {
-            returnData.rowCount  =gimService.deleteGimDetail(it)
+            returnData.rowCount = gimService.deleteGimDetail(it)
         }
         return returnData
     }

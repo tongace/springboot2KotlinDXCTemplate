@@ -7,7 +7,9 @@ import com.dxc.application.commonlib.util.LoggerDelegate
 import com.dxc.application.commonlib.util.toJsonString
 import org.springframework.jdbc.core.DataClassRowMapper
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource
+import org.springframework.stereotype.Repository
 
+@Repository
 class GimMasterRepository : BaseRepository() {
     private companion object {
         private val log by LoggerDelegate()
@@ -38,10 +40,10 @@ class GimMasterRepository : BaseRepository() {
         model.searchGimTypes?.takeIf { it.isNotEmpty() }?.let {
             sql.append(" AND GIM_TYPE IN ${it.joinToString(prefix = "('", postfix = "')", separator = "','")} ")
         }
-        model.searchGimDesc?.takeIf { it.isBlank() }?.let {
+        model.searchGimDesc?.takeIf { it.isNotBlank() }?.let {
             sql.append(" AND UPPER(GIM_DESC) LIKE UPPER(REPLACE(:searchGimDesc,'*','%')) ")
         }
-        model.searchActiveFlag?.takeIf { it.isBlank() && it.equals("ALL", true) }?.let {
+        model.searchActiveFlag?.takeIf { it.isNotBlank() && !it.equals("ALL", true) }?.let {
             sql.append(" AND ACTIVE_FLAG =:searchActiveFlag ")
         }
         sql.append(" ORDER BY GIM_TYPE ")

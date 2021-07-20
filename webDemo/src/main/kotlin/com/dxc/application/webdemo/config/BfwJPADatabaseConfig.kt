@@ -1,6 +1,6 @@
 package com.dxc.application.webdemo.config
 
-import com.example.application.commonconfig.properties.BfwJpaDataSourceProperties
+import com.dxc.application.commonconfig.properties.BfwJpaDataSourceProperties
 import org.apache.commons.dbcp2.BasicDataSource
 import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.boot.context.properties.EnableConfigurationProperties

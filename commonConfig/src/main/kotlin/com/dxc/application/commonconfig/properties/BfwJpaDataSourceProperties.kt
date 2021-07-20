@@ -1,11 +1,12 @@
-package com.example.application.commonconfig.properties
+package com.dxc.application.commonconfig.properties
 
 import org.springframework.boot.context.properties.ConfigurationProperties
 import org.springframework.boot.context.properties.ConstructorBinding
 
+
 @ConstructorBinding
-@ConfigurationProperties(prefix = "app-jpa")
-data class AppJpaDataSourceProperties (
+@ConfigurationProperties(prefix = "bfw-jpa")
+data class BfwJpaDataSourceProperties(
     val driverClassName: String,
     val url: String,
     val username: String,

@@ -1,14 +1,16 @@
-package com.example.application.commonconfig.properties
+package com.dxc.application.commonconfig.properties
 
 import org.springframework.boot.context.properties.ConfigurationProperties
 import org.springframework.boot.context.properties.ConstructorBinding
 
 @ConstructorBinding
-@ConfigurationProperties(prefix = "app-jdbc")
-data class AppDataSourceProperties(
+@ConfigurationProperties(prefix = "app-jpa")
+data class AppJpaDataSourceProperties (
     val driverClassName: String,
-    val maximumPoolSize: Int,
     val url: String,
     val username: String,
-    val password: String
+    val password: String,
+    val hibernateDialect: String,
+    val database: String,
+    val showSql: Boolean
 )

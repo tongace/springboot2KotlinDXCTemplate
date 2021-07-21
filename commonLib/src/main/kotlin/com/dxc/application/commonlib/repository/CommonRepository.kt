@@ -1,12 +1,12 @@
 package com.dxc.application.commonlib.repository
 
 import com.dxc.application.commonlib.model.Combo
-import com.dxc.application.commonlib.model.GimHeader
+import com.dxc.application.commonlib.model.Common
 import com.dxc.application.commonlib.util.LoggerDelegate
 import com.dxc.application.commonlib.util.toJsonString
 import org.springframework.jdbc.core.DataClassRowMapper
 import org.springframework.stereotype.Repository
-import java.time.LocalDateTime
+
 
 @Repository
 class CommonRepository : BaseRepository() {
@@ -15,7 +15,11 @@ class CommonRepository : BaseRepository() {
     }
 
     fun getDBDateTime() =
-        jdbcTemplate?.queryForObject("SELECT SYSDATE FROM DUAL", LocalDateTime::class.java)
+        jdbcTemplate?.queryForObject(
+            "SELECT SYSDATE as CURRENT_SERVER_DATE_TIME FROM DUAL", DataClassRowMapper.newInstance(
+                Common::class.java
+            )
+        )
 
     fun getGimTypeCombo(): MutableList<Combo>? {
         val sql = """

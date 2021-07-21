@@ -9,13 +9,12 @@ import org.springframework.http.converter.HttpMessageConverter
 import org.springframework.stereotype.Controller
 import org.springframework.web.bind.annotation.ControllerAdvice
 import org.springframework.web.bind.annotation.RestController
-import org.springframework.web.bind.annotation.RestControllerAdvice
 import org.springframework.web.servlet.mvc.method.annotation.RequestBodyAdviceAdapter
 import java.lang.reflect.Type
 import javax.servlet.http.HttpServletRequest
 
-@ControllerAdvice(annotations = [Controller::class,RestController::class])
-class RequestLog(private val request: HttpServletRequest) : RequestBodyAdviceAdapter() {
+@ControllerAdvice(basePackages = ["com.dxc.application"])
+class RequestLog(private val request: HttpServletRequest, private val logService: LogService) : RequestBodyAdviceAdapter() {
     private companion object {
         private val log by LoggerDelegate()
     }
@@ -33,13 +32,7 @@ class RequestLog(private val request: HttpServletRequest) : RequestBodyAdviceAda
         targetType: Type,
         converterType: Class<out HttpMessageConverter<*>>
     ): Any {
-        when(request.method){
-            HttpMethod.GET.name -> {
-                log.info("API URI: ${request.requestURI}, http method: ${request.method}, parameters : ${request.queryString} ")
-            }else -> {
-                log.info("API URI: ${request.requestURI}, http method: ${request.method} , request body : ${body.toJsonString()}")
-            }
-        }
+        logService.logRequest(request, body);
         return super.afterBodyRead(body, inputMessage, parameter, targetType, converterType)
     }
 

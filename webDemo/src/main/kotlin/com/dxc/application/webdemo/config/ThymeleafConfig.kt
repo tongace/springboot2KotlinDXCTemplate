@@ -1,13 +1,14 @@
 package com.dxc.application.webdemo.config
 
+import com.dxc.application.webdemo.logging.LogInterceptor
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.autoconfigure.thymeleaf.ThymeleafProperties
 import org.springframework.context.ApplicationContext
 import org.springframework.context.ApplicationContextAware
 import org.springframework.context.annotation.Bean
-import org.springframework.context.annotation.ComponentScan
 import org.springframework.context.annotation.Configuration
 import org.springframework.web.servlet.config.annotation.EnableWebMvc
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer
 import org.thymeleaf.spring5.SpringTemplateEngine
@@ -23,6 +24,8 @@ class ThymeleafConfig() : ApplicationContextAware, WebMvcConfigurer {
     private lateinit var thymeleafProperties: ThymeleafProperties
     @Autowired
     private lateinit var springTemplateEngine: SpringTemplateEngine
+    @Autowired
+    private lateinit var logInterceptor:LogInterceptor
 
     private var applicationContext: ApplicationContext? = null
     override fun setApplicationContext(applicationContext: ApplicationContext) {
@@ -82,5 +85,9 @@ class ThymeleafConfig() : ApplicationContextAware, WebMvcConfigurer {
             addResourceHandler("/scripts/**").addResourceLocations("/WEB-INF/resources/scripts/")
             addResourceHandler("/images/**").addResourceLocations("/WEB-INF/resources/images/")
         }
+    }
+
+    override fun addInterceptors(registry: InterceptorRegistry) {
+        registry.addInterceptor(logInterceptor)
     }
 }

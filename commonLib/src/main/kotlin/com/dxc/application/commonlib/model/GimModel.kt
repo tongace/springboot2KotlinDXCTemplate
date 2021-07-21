@@ -2,7 +2,6 @@ package com.dxc.application.commonlib.model
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import java.math.BigDecimal
-import java.time.LocalDateTime
 import java.util.*
 
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -34,9 +33,9 @@ data class GimDetail(val gimType: String?, val gimCd: String?) {
     var activeFlag: String? = null
     var displayActiveFlag: String? = null
     var createdBy: String? = null
-    var createdDt: LocalDateTime? = null
+    var createdDt: Date? = null
     var modifiedBy: String? = null
-    var modifiedDt: LocalDateTime? = null
+    var modifiedDt: Date? = null
     var mode: String? = ""
 }
 

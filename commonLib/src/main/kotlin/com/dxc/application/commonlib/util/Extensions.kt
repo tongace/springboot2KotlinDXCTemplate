@@ -1,5 +1,6 @@
 package com.dxc.application.commonlib.util
 
+import com.fasterxml.jackson.databind.SerializationFeature
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
@@ -17,4 +18,7 @@ fun <T : Any> getClassForLogging(javaClass: Class<T>): Class<*> {
         it.kotlin.companionObject?.java == javaClass
     } ?: javaClass
 }
-fun Any.toJsonString(): String = jacksonObjectMapper().writeValueAsString(this)
+
+fun Any.toJsonString(): String =
+    jacksonObjectMapper().findAndRegisterModules().configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, true)
+        .writeValueAsString(this)

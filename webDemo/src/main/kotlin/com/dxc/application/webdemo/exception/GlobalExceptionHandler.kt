@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice
 import org.springframework.web.bind.annotation.ExceptionHandler
 import javax.servlet.http.HttpServletRequest
 
-@ControllerAdvice
+@ControllerAdvice(basePackages = ["com.dxc.application"])
 class GlobalExceptionHandler(private val messageSource: MessageSource) {
     private companion object {
         private val log by LoggerDelegate()

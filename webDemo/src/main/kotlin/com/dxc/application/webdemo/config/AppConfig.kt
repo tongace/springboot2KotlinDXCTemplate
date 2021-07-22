@@ -13,11 +13,8 @@ import java.nio.charset.StandardCharsets
 @Configuration
 @PropertySource("classpath:demo-application.properties")
 @ComponentScan(
-    "com.dxc.application.webdemo.feature",
     "com.dxc.application.commonlib.repository",
     "com.dxc.application.commonlib.service",
-    "com.dxc.application.webdemo.exception",
-    "com.dxc.application.webdemo.logging"
 )
 class AppConfig {
 

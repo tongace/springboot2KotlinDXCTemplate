@@ -7,6 +7,7 @@ import com.dxc.application.webdemo.util.MessageUtil
 import org.springframework.context.MessageSource
 import org.springframework.web.bind.annotation.ControllerAdvice
 import org.springframework.web.bind.annotation.ExceptionHandler
+import org.springframework.web.bind.annotation.ResponseBody
 import javax.servlet.http.HttpServletRequest
 
 @ControllerAdvice(basePackages = ["com.dxc.application"])
@@ -16,17 +17,19 @@ class GlobalExceptionHandler(private val messageSource: MessageSource) {
     }
 
     @ExceptionHandler(ApplicationException::class)
+    @ResponseBody
     fun applicationExceptionHandler(request: HttpServletRequest, ae: ApplicationException) =
         RestJsonData<String>(
             message = MessageUtil.getErrorMessage(messageSource, ae, request),
             rowCount = null,
             data = null
         ).also {
-            log.warn(ae.message, ae)
+            log.warn("Application Error with Message code : ${ae.messageCode}")
         }
     @ExceptionHandler(Exception::class)
-    fun exceptionHandler(request: HttpServletRequest, ex: Exception): RestJsonData<String>{
-        return when(ex){
+    @ResponseBody
+    fun exceptionHandler(request: HttpServletRequest, ex: Exception)=
+        when(ex){
             is ApplicationException -> {
                 val ae: ApplicationException = ex
                 RestJsonData<String>(
@@ -34,7 +37,7 @@ class GlobalExceptionHandler(private val messageSource: MessageSource) {
                     rowCount = null,
                     data = null
                 ).also {
-                    log.warn(ae.message, ae)
+                    log.warn("Application Error with Message code : ${ae.messageCode}")
                 }
             }
             else -> {
@@ -47,5 +50,4 @@ class GlobalExceptionHandler(private val messageSource: MessageSource) {
                 }
             }
         }
-    }
 }

@@ -8,10 +8,9 @@ import org.springframework.http.server.ServerHttpResponse
 import org.springframework.web.bind.annotation.ControllerAdvice
 import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice
 import javax.servlet.http.HttpServletRequest
-import javax.servlet.http.HttpServletResponse
 
 @ControllerAdvice(basePackages = ["com.dxc.application"])
-class ResponseLog(private val logService: LogService) : ResponseBodyAdvice<Any> {
+class ResponseLog(private val httpReq: HttpServletRequest, private val logService: LogService) : ResponseBodyAdvice<Any> {
     override fun supports(methodParameter: MethodParameter, aClass: Class<out HttpMessageConverter<*>>) = true
     override fun beforeBodyWrite(
         body: Any?,
@@ -21,7 +20,7 @@ class ResponseLog(private val logService: LogService) : ResponseBodyAdvice<Any> 
         request: ServerHttpRequest,
         response: ServerHttpResponse
     ): Any? {
-        logService.logResponse(request , response , body)
+        logService.logResponse(httpReq, response, body)
         return body
     }
 }

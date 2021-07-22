@@ -19,6 +19,8 @@ fun <T : Any> getClassForLogging(javaClass: Class<T>): Class<*> {
     } ?: javaClass
 }
 
-fun Any.toJsonString(): String =
-    jacksonObjectMapper().findAndRegisterModules().configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, true)
+inline fun  <T> T.toJsonString(): String =
+    jacksonObjectMapper()
+        .findAndRegisterModules()
+        .configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, true)
         .writeValueAsString(this)

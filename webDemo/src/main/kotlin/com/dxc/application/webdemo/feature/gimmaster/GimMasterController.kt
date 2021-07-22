@@ -1,6 +1,7 @@
 package com.dxc.application.webdemo.feature.gimmaster
 
 import com.dxc.application.commonlib.constants.MessagesConstants
+import com.dxc.application.commonlib.exception.ApplicationException
 import com.dxc.application.commonlib.model.GimDetail
 import com.dxc.application.commonlib.model.GimHeader
 import com.dxc.application.commonlib.model.RestJsonData
@@ -59,16 +60,14 @@ class GimMasterController(
     fun getGimDetail(@RequestBody model: GimDetail?, request: HttpServletRequest): RestJsonData<List<GimDetail>> {
         val returnData = RestJsonData<List<GimDetail>>()
         model?.let {
-            val gimDetailList = gimService.getGimDetail(it);
-            if (gimDetailList?.isNotEmpty() == true) {
+            gimService.getGimDetail(it)?.takeIf { gimDetailList ->
+                gimDetailList.isNotEmpty()
+            }?.let { gimDetailList ->
                 returnData.data = gimDetailList
-            } else {
-                returnData.message = messageSource.getMessage(
-                    MessagesConstants.ERROR_MESSAGE_DATA_NOT_FOUND,
-                    null,
-                    RequestContextUtils.getLocale(request)
-                )
-            }
+            } ?: throw ApplicationException(
+                messageCode = MessagesConstants.ERROR_MESSAGE_DATA_NOT_FOUND,
+                null
+            )
         }
         return returnData
     }

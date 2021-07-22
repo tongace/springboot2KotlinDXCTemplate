@@ -29,11 +29,11 @@ class LogService {
         log.info(stringBuilder.toString());
     }
 
-    fun logResponse(request: ServerHttpRequest, response: ServerHttpResponse, body: Any?) {
+    fun logResponse(request: HttpServletRequest, response: ServerHttpResponse, body: Any?) {
         val stringBuilder = StringBuilder()
         stringBuilder.append("RESPONSE ");
         stringBuilder.append("method=[").append(request.method).append("] ");
-        stringBuilder.append("path=[").append(request.uri).append("] ");
+        stringBuilder.append("path=[").append(request.requestURI).append("] ");
         body?.let {
             stringBuilder.append("responseBody=[").append(it.toJsonString()).append("] ");
         }

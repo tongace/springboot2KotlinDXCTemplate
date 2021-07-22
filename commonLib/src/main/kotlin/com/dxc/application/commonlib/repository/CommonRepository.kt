@@ -16,7 +16,9 @@ class CommonRepository : BaseRepository() {
 
     fun getDBDateTime() =
         jdbcTemplate?.queryForObject(
-            "SELECT SYSDATE as CURRENT_SERVER_DATE_TIME FROM DUAL", DataClassRowMapper.newInstance(
+            "SELECT SYSDATE as CURRENT_SERVER_DATE_TIME FROM DUAL".also {
+                log.info("sql >>>>> $it")
+            }, DataClassRowMapper.newInstance(
                 Common::class.java
             )
         )

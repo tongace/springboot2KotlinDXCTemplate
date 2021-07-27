@@ -3,6 +3,7 @@ server:
     context-path: /demo
 spring:
   profiles:
+    active: OFFLINE
     include:
       - data-access
   thymeleaf:

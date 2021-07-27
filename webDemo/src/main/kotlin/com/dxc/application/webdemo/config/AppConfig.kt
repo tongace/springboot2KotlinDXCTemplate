@@ -19,6 +19,7 @@ import java.nio.charset.StandardCharsets
 class AppConfig {
 
     companion object {
+        @Bean
         fun propertySourcesPlaceholderConfigurer() = PropertySourcesPlaceholderConfigurer()
     }
 

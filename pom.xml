@@ -21,4 +21,10 @@
 		<thymeleaf.version>3.0.12.RELEASE</thymeleaf.version>
 		<thymeleaf-layout-dialect.version>2.5.3</thymeleaf-layout-dialect.version>
 	</properties>
+	<repositories>
+		<repository>
+			<id>maven-group</id>
+			<url>http://159.89.210.222:8085/repository/maven-public/</url>
+		</repository>
+	</repositories>
 </project>

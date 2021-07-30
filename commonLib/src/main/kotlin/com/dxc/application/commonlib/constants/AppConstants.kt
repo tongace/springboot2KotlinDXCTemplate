@@ -1,6 +1,9 @@
 package com.dxc.application.commonlib.constants
 
 object AppConstants {
+    init {
+        println("singelton")
+    }
     const val PROJECT_CD = "projectCode"
     const val ACTIVE_FLAG_ACTIVE = "Y"
     const val ACTIVE_FLAG_INACTIVE = "N"

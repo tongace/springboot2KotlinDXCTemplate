@@ -6,10 +6,11 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcDaoSupport
 import java.util.*
 import javax.sql.DataSource
 
-abstract class BaseRepository: NamedParameterJdbcDaoSupport() {
+abstract class BaseRepository(
+) : NamedParameterJdbcDaoSupport() {
     @Autowired
     @Qualifier("appDataSource")
-    fun setJdbcDaoSupportDataSource(dataSource: DataSource){
+    fun setJdbcDaoSupportDataSource(dataSource: DataSource) {
         Locale.setDefault(Locale.US)
         super.setDataSource(dataSource)
     }
